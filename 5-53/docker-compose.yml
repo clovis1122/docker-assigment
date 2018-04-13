@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  custom-drupal:
+    image: drupal:8.2
+    build: .
+    volumes:
+      - /var/www/html/modules
+      - /var/www/html/profiles
+      - /var/www/html/themes
+      - /var/www/html/sites
+    ports:
+      - 8080:80
+  postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_PASSWORD: pass
+    volumes: 
+     - drupal-data:/var/lib/postgresql/data
+
+volumes:
+  drupal-data: 
